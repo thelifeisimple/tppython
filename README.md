@@ -11,6 +11,7 @@ Estructura de la información en los archivos
 
 Uso del programa
 Los modulos de la aplicación son los siguientes:
+
 1- Login: 
   Se solicita al usuario a través de un login el código de usuario  y clave las cuales se validan contra el archivo de usuarios (.csv)
   Se valida en esta seccion:
