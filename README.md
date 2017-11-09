@@ -28,27 +28,28 @@ Los modulos de la aplicación son los siguientes:
 3- Bienvenida:
   En esta pantalla se mostrará el listado de ultimas ventas con el contenido de los registros (archivo_csv) 
 
-<<Menu>> 
-4- Logo Farmasoft:
+
+
+4- (Menu) Logo Farmasoft:
 	. El logo de farmasoft es un link que nos llevará a la pantalla de bienvenida (3).
 
-5- Salir:
+5- (Menu) Salir:
 	. El menu "Salir" deslogueará al usuario de la aplicacion llevandolo nuevamente a la pantalla de Login (1)
 
-6- Ultimas Ventas:
+6- (Menu) Ultimas Ventas:
 	. En este item de menu se mostrará el reporte de ultimas ventas, el cual mostrará la informacion completa del archivo de ventas, al igual que al ingresar a la app.
 
-7- Clientes por Producto:
+7- (Menu) Clientes por Producto:
 	. En este item se podrá filtrar por "Nombre de producto" o por parte de él y se recuperarán todos los registros del archivo de ventas que coincidan en su nombre de producto con el filtro ingresado.
 
-8- Productos por Cliente:
+8- (Menu) Productos por Cliente:
 	. En este item se podrá filtrar por "Nombre de Cliente" o por parte de él y se recuperarán todos los registros del archivo de ventas que coincidan en su nombre del cliente con el filtro ingresado.
 
-9- Mejores Productos:
+9- (Menu) Mejores Productos:
 	. En este item se podrá ver agrupado por Producto (Nombre) las ventas contenidas en el archivo de ventas. Los datos mostrados serán Codigo, Nombre de producto, cantidad de ventas y monto vendido. 
 	  El orden de la tabla resultado será por "Monto Vendido" en forma decreciente para ver en los primeros lugares los productos mas vendidos.
 
-10- Mejores Clientes:
+10- (Menu) Mejores Clientes:
 	. En este item se podrá ver agrupado por Cliente las ventas contenidas en el archivo de ventas. Los datos mostrados serán Cliente, cantidad de compras y monto comprado. 
 	  El orden de la tabla resultado será por "Monto Comprado" en forma decreciente para ver en los primeros lugares los clientes mas compradores.
 	  
