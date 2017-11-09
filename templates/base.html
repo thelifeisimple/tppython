@@ -1,0 +1,42 @@
+<link rel="shortcut icon" href="{{ url_for('static', filename = 'favicon.png') }}" type="image/x-icon">
+<link rel="icon" href="{{ url_for('static', filename = 'favicon.png') }}" type="image/x-icon">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+{% block navbar %}
+<head>
+    <title>FarmaSoft</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+  </head>
+ l <body>
+    <header>
+      <div class="container">
+        <h1 class="logo"><a href="{{ url_for('home') }}">FarmaSoft</a></h1>
+
+        <strong><nav>
+
+          <ul class="menu">
+			<li><a href="{{ url_for('logout') }}">Salir</a></li>
+            <li><a href="{{ url_for('ventasultimas') }}">Últimas Ventas</a></li>
+			<li><a href="{{ url_for('ventasproducto') }}">Cliente x Producto</a></li>
+			<li><a href="{{ url_for('ventascliente') }}">Productos x Cliente</a></li>
+			<li><a href="{{ url_for('mejoresproductos') }}">Mejores Productos</a></li>
+			<li><a href="{{ url_for('mejoresclientes') }}">Mejores Clientes</a></li>
+
+          </ul>
+        </nav></strong>
+      </div>
+    </header>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    {% block page_content %}{% endblock %}
+</div>
+
+
+
+{% endblock %}
+
+
+{% block scripts %}
+{% endblock %}

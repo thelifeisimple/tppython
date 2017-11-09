@@ -1,0 +1,26 @@
+{% extends 'index.html' %}
+
+{% block content %}
+        <h1>Listado de Ventas</h1>
+
+                <table>
+                        <tr>
+                                <th>CLIENTE</th>
+                                <th>CODIGO</th>
+                                <th>PRODUCTO</th>
+                                <th>CANTIDAD</th>
+                                <th>PRECIO</th>
+                        </tr>
+                {% for lista in object_list %}
+                        <tr>
+                                <td>{{ lista.cliente }}</td>
+                                <td>{{ lista.codigo}}</td>
+                                <td>{{ lista.producto }}</td>
+                                <td>{{ lista.cantidad}}</td>
+                                <td>{{ lista.precio }}</td>
+                        </tr>
+                {% empty %}
+                        <li>Sin ventas de productos.</li>
+                {% endfor %}
+                </table>
+{% endblock content %}
