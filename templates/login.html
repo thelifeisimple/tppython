@@ -24,13 +24,24 @@
 				</div>
  
                 <input type="submit" value="Ingresar" class="btn btn-primary btn-large btn-block" >
-			    <br>
+			   
 				{% if msjerror %}
 					<div class="app-title">
 						<h3>{{msjerror}}</h3>
 					</div>
 				{% endif %}
 			</div>
+		 <br>
+</form>
+<form action="/olvidarclave" method="POST">
+			 <div class="btn:hover">
+				<input type="submit" value="Recordar Clave" name="forget"  class="btn btn-primary btn-large btn-block" >
+							<br>
+</form>
+<form action="/registarusuario" method="POST">
+
+ 				<input type="submit" value="Registrarse" name="register"  class="btn btn-primary btn-large btn-block" >
+			</div>			
 		</div>
 	</div>
 </form>

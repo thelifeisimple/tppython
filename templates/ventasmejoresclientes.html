@@ -7,7 +7,14 @@
     <div class="container">
       {% block content %}
 	  <h1>Listado de Ventas - Mejores Clientes</h1>
+			<form action="/exportarmejoresclientes" method="POST">
+				  <input name="reportname" type="text" value="ventamejoresclientes" hidden>
+				  <input type="submit" value="Exportar Tabla">
+				  {% if archivo %}
+					<p>Archivo exportado en {{archivo}}</p>
+				 {% endif %}
 
+				  </form>
                 <table border=1>
                         <tr>
                                 <th>CLIENTE</th>
@@ -17,7 +24,7 @@
                         </tr>
                 {% for linea in listado %}
                         <tr>
-							<td>{{linea[0]}}</td>
+							<td>{{linea[0]}}</td>							
 							<td>{{linea[1]}}</td>
 							<td>{{linea[2]}}</td>
                         </tr>

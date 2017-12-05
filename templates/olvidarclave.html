@@ -1,0 +1,37 @@
+<link rel="stylesheet" href="/static/css/style.css" type="text/css">
+{% block body %}
+{% if session['logged_in'] %}
+<p>You're logged in already!</p>
+{% else %}
+ 
+ 
+<form action="/recuperarclave" method="POST" autocomplete="off">
+	<div class="login">
+		<div class="login-screen">
+			<div class="app-title">
+				<h1>Recuperar Clave</h1>
+			</div>
+ 
+			<div class="login-form">
+				<div class="control-group">
+				<input type="text" class="login-field" value="" placeholder="usuario" name="username">
+				<label class="login-field-icon fui-user" for="login-name"></label>
+				</div>
+ 
+ 
+                <input type="submit" value="Recuperar" class="btn btn-primary btn-large btn-block" >
+				<a href="{{ url_for('home') }}" align="center" " class="btn btn-primary btn-large btn-block">Cancelar</a>
+
+
+			   
+				{% if msjerror %}
+					<div class="app-title">
+						<h3>{{msjerror}}</h3>
+					</div>
+				{% endif %}
+			</div>
+		 <br>
+</form>
+ 
+{% endif %}
+{% endblock %}

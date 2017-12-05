@@ -8,7 +8,15 @@
     <div class="container">
       {% block content %}
 	  <h1>Listado de Ventas por Producto</h1>
-
+			  <form action="/exportarventasproducto" method="POST">
+				  <input name="reportname" type="text" value="ventasproducto" hidden>
+				  <input name="origen" type="text" value="ventasproducto" hidden>
+				  <input type="submit" value="Exportar Tabla">
+				  {% if archivo %}
+					<p>Archivo exportado en {{archivo}}</p>
+				 {% endif %}
+			  </form>
+			  
 				<form action="/buscarventasproducto" method="POST">
 				  Nombre de Producto: &nbsp;
 				  <input type="text" value="" name="producto">  &nbsp;

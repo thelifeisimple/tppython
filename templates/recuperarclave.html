@@ -1,0 +1,70 @@
+<link rel="stylesheet" href="/static/css/style.css" type="text/css">
+{% block body %}
+{% if session['logged_in'] %}
+<p>You're logged in already!</p>
+{% else %}
+ 
+
+
+<form  action="/usuario" method="POST">
+	<div class="forget">
+		<div class="login-screen">
+			<div class="app-title">
+				<h1>Recuperar Clave por Pregunta Secreta</h1>
+			</div>
+ 
+		{% if user %}
+			{% for linea in user %}
+				<table border=0 align="center">
+				<tr><th>Usuario</th>
+                 <td inputread><input title="Usuario" type="text" disabled="true" class="login-field" value="{{linea[0]}}"  placeholder="{{linea[0]}}" name="username">
+				</td>
+				</tr>
+				<tr><th>Pregunta Secreta</th>
+ 				<td>
+				<input title="Pregunta Secreta" type="text" disabled="true" value=""  placeholder="{{linea[4]}}" name="pregunta">
+				</td>
+				</tr>
+				<tr><th>Respuesta Secreta</th>
+ 				<td>
+				<input autofocus title="Respuesta" type="text"  class="login-field" value=""  placeholder="ingrese respuesta" name="respuesta" pattern="{{linea[5]}}" required>
+				</td>
+				</tr> 
+				</table>
+				<br>
+ 
+ 				<table border=0 align="center">
+				<tr> 
+				<input type="submit" value="Recuperar" class="btn btn-primary btn-large btn-block" >
+
+				</td>
+				<td>
+					<a href="{{ url_for('olvidarclave') }}" align="center" class="btn btn-primary btn-large btn-block">Cancelar</a>
+				</td>
+				</tr>
+
+ 				</table>
+
+ 
+
+			   
+				{% if msjerror %}
+					<div class="app-title">
+						<h3>{{msjerror}}</h3>
+					</div>
+				{% endif %}
+			 
+			{% endfor %}
+		{% else %}
+					<li>El usuario no esta registrado.</li>
+					<a href="{{ url_for('olvidarclave') }}" align="center" class="btn btn-primary btn-large btn-block">Aceptar</a>
+
+		{% endif %}
+			</div>
+		 <br>
+</form>
+ 
+{% endif %}
+{% endblock %}
+
+ 

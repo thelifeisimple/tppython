@@ -9,6 +9,14 @@
   	  <h2>Bienvenido </h2>
 
 	  <h1>Listado de Ultimas Ventas</h1>
+  <form action="/exportarventasultimas" method="POST">
+	  <input name="reportname" type="text" value="ventasultimas" hidden>
+	  <input type="submit" value="Exportar Tabla">
+	  {% if archivo %}
+		<p>Archivo exportado en {{archivo}}</p>
+	 {% endif %}
+  </form>
+
 
                 <table border=1>
                         <tr>

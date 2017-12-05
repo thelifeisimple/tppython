@@ -4,17 +4,17 @@
 {% if session['logged_in'] %}
  
 
-     {% if listadoerrores %}
+     {% if listadoerror %}
 		<div class="container">
 		  {% block content %}
-		  <h1>Listado de Errores de Archivo de Ventas</h1>
-		  <h2>Se visualizan al login. Las consultas del sistema funcionaran con los registros correctos</h2>
+		  <h1>Bienvenido a FarmaSOFT de Ana</h1>
+		  <p>Se visualizan al login. Las consultas del sistema funcionaran con los registros correctos</p>
 		  
 		  
 
 					<table>
 							<tr> 	 	 	
-									<th>ERROR</th>
+									<th>Descripcion del Error</th>
 				 
 							</tr>
 					{% for linea in listadoerror %}

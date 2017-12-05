@@ -4,12 +4,13 @@ body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #444;
 }
+
 /*
  * Formatting the header area
  */
 header {
   background-color: #3498DB;
-  height: 40px;
+  height: 60px;
   width: 100%;
   opacity: .9;
   margin-bottom: 10px;
@@ -27,12 +28,19 @@ header h1.logo:hover {
   color: #fff;
   text-decoration: none;
 }
+
+
 /*
  * Centering the body content
  */
 .container {
   width: 1200px;
   margin: 0 auto;
+  margin: 0;
+  padding: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #fff;
+}
 }
 div.home {
   padding: 10px 0 30px 0;
@@ -62,6 +70,7 @@ h3 {
   letter-spacing: -1px;
   color: #999;
 }
+
 .menu {
   float: right;
   margin-top: 8px;
@@ -76,5 +85,58 @@ h3 {
   color: #fff;
   text-decoration: none;
 }
+* {
+box-sizing: border-box;
+}
+ 
+.recuadro {
+margin: 20px auto;
+width: 400px;
+}
+.th {
+  color: #FFFFFF  !important;
+}
+.user-screen {
+background-color: #3498DB;
+padding: 20px;
+border-radius: 5px;
+color: #FFFFFF
+}
 
+.btn {
+  border: 2px solid ;
+  background: #14141747;
+  color: #ffffff;
+  font-size: 18px;
+  line-height: 25px;
+  padding: 10px 0;
+  text-decoration: bold;
+  text-shadow: none;
+  border-radius: 3px;
+  box-shadow: 2px;
+  transition: 0.25s;
+  display: block;
+  width: 250px;
+  margin: 2 auto;
+}
+.app-title {
+text-align: center;
+color: #777;
+}
 
+a {
+  border: 2px solid ;
+  background: #14141747;
+  color: #ffffff;
+  font-size: 18px;
+  line-height: 25px;
+  padding: 10px 0;
+  text-decoration: bold;
+  text-shadow: none;
+  border-radius: 3px;
+  box-shadow: 2px;
+  transition: 0.25s;
+  display: block;
+  width: 250px;
+  margin: 2 auto;
+}

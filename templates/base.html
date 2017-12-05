@@ -7,15 +7,17 @@
     <title>FarmaSoft</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
   </head>
- l <body>
+  <body>
     <header>
       <div class="container">
-        <h1 class="logo"><a href="{{ url_for('home') }}">FarmaSoft</a></h1>
+        <h1 class="logo"><a href="{{ url_for('home') }}" text-decoration="none";>FarmaSoft</a></h1>
 
         <strong><nav>
 
           <ul class="menu">
 			<li><a href="{{ url_for('logout') }}">Salir</a></li>
+			<li><a href="{{ url_for('errores') }}">Errores</a></li>
+			<li><a href="{{ url_for('datausuario') }}">Usuario</a></li>
             <li><a href="{{ url_for('ventasultimas') }}">Últimas Ventas</a></li>
 			<li><a href="{{ url_for('ventasproducto') }}">Cliente x Producto</a></li>
 			<li><a href="{{ url_for('ventascliente') }}">Productos x Cliente</a></li>
@@ -32,7 +34,6 @@
 <div class="container">
     {% block page_content %}{% endblock %}
 </div>
-
 
 
 {% endblock %}

@@ -1,0 +1,136 @@
+<link rel="stylesheet" href="/static/css/main.css" type="text/css">
+{% extends "base.html" %}
+{% block body %}
+{% if session['logged_in'] %}
+ 
+ <div class="container">
+      {% block content %}
+{% if editar %}	  
+	<h1>Modificar Datos de Usuario</h1>
+ {% else %}
+	<h1>Ver Datos de Usuario</h1>
+{% endif %}
+	<div class="recuadro">
+		<div class="user-screen">
+			<div class="app-title">
+			</div>
+ {% for linea in user %}
+	 {% if editar %}	  
+	<form  action="/guardarusuario" method="POST">
+	 {% else %}
+	<form  action="/editarusuario" method="POST">
+	{% endif %}
+
+				<table border=0 align="center">
+				<tr><th>Usuario</th>
+                 {% if editar %}
+				 <td><input   type="text"   class="login-field" value="{{linea[0]}}"  placeholder="ingrese usuario" name="" disabled>
+				 <td><input   type="text"   class="login-field" value="{{linea[0]}}"  placeholder="ingrese usuario" name="username" hidden>
+				 {% else %}
+				<td><input   type="text"   class="login-field" value="{{linea[0]}}"  placeholder="ingrese usuario" name="username" disabled>				
+				{% endif %}
+				</td>
+				</tr>
+				<tr><th>Clave</th>
+                 {% if editar %}
+				 <td inputread><input autofocus   type="text"   class="login-field" value="{{linea[1]}}"  placeholder="ingrese clave" name="clave" pattern=".{4,8}" title="4 a 8 caracteres"  >
+				 {% else %}
+				 <td inputread><input    type="text"   class="login-field" value="{{linea[1]}}"  placeholder="ingrese clave" name="clave" pattern=".{4,8}" title="4 a 8 caracteres"  disabled>
+				{% endif %}
+				</td>
+				</tr>
+				 
+				<tr><th>Nombre</th>
+ 				<td>
+				{% if editar %}
+				<input title="nombre" type="text"   value="{{linea[2]}}"  placeholder="ingrese nombre" name="nombre" pattern="(?=*[a-z])(?=*[A-Z]).{2,40}" >				 
+				{% else %}
+				<input title="nombre" type="text"   value="{{linea[2]}}"  placeholder="ingrese nombre" name="nombre" pattern="(?=*[a-z])(?=*[A-Z]).{2,40}" disabled>				
+				{% endif %}
+				</td>
+				</tr>
+				<tr><th>Apellido</th>
+ 				<td>
+				{% if editar %}
+				<input   title="Apellido" type="text"  class="login-field" value="{{linea[3]}}"  placeholder="ingrese apellido" name="apellido" pattern="(?=*[a-z])(?=*[A-Z]).{2,60}" >
+				{% else %}
+				<input   title="Apellido" type="text"  class="login-field" value="{{linea[3]}}"  placeholder="ingrese apellido" name="apellido" pattern="(?=*[a-z])(?=*[A-Z]).{2,60}" disabled>
+				{% endif %}
+				</td>
+				</tr> 
+				<tr><th>Pregunta secreta</th>
+ 				<td>
+				{% if editar %}
+				<select name="pregunta" >
+				{% else %}
+				<select name="pregunta" disabled>
+				{% endif %}
+					  {% if linea[4] == 'Nombre de la primer mascota' %}
+						<option selected>Nombre de la primer mascota</option>
+					  {% else %}	  
+						<option >Nombre de la primer mascota</option>
+					 {% endif %}	
+					  
+					  {% if linea[4] =="Lugar donde nacio" %}
+						<option  selected>Lugar donde nacio</option>
+					  {% else %}	  
+						<option >Lugar donde nacio</option>
+					 {% endif %}
+
+					 {% if linea[4]=="Apellido de soltera de su madre" %}
+						<option  selected>Apellido de soltera de su madre</option>
+					  {% else %}	  
+						<option >Apellido de soltera de su madre</option>
+					 {% endif %}
+					</select>
+				</td>
+				</tr>
+				<tr><th>Respuesta Secreta</th>
+ 				<td>
+				{% if editar %}
+				<input  title="Respuesta" type="text"  class="login-field" value="{{linea[5]}}"  placeholder="ingrese respuesta secreta" name="respuesta" pattern=".{2,}" title="2 o mas caracteres"  >
+				{% else %}
+				<input  title="Respuesta" type="text"  class="login-field" value="{{linea[5]}}"  placeholder="ingrese respuesta secreta" name="respuesta" pattern=".{2,}" title="2 o mas caracteres"  disabled>
+				{% endif %}
+				</td>
+				</tr> 
+				</table>
+ {% endfor %}				
+				<br>
+ 
+ 				<table border=0 align="center">
+				<tr> 
+				{% if editar %}
+				<input type="submit" value="Aceptar" class="btn btn-primary btn-large btn-block" >
+				<a href="{{ url_for('datausuario') }}" align="center" class="btn btn-primary btn-large btn-block">Cancelar</a>
+
+				{% else %}
+				<input autofocus type="submit" value="Modificar" class="btn btn-primary btn-large btn-block" >
+				{% endif %}				
+
+				</td>
+			
+				</tr>
+
+ 				</table>
+
+ 
+</form>
+			   
+				{% if msjerror %}
+					<div class="app-title">
+						<h3>{{msjerror}}</h3>
+					</div>
+				{% endif %}
+			 
+ 		 
+
+ 			</div>
+		 <br>
+{% endblock %}
+    </div>
+ 
+ 
+ 
+{% endif %}
+{% endblock %}

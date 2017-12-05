@@ -1,0 +1,84 @@
+<link rel="stylesheet" href="/static/css/style.css" type="text/css">
+{% block body %}
+{% if session['logged_in'] %}
+<p>You're logged in already!</p>
+{% else %}
+ 
+
+
+<form  action="/saveuser" method="POST">
+	<div class="forget">
+		<div class="login-screen">
+			<div class="app-title">
+				<h1>Registrar Usuario</h1>
+			</div>
+ 
+				<table border=0 align="center">
+				<tr><th>Usuario</th>
+                 <td><input autofocus   type="text"   class="login-field" value=""  placeholder="ingrese usuario" name="username" pattern=".{4,8}" title="4 a 8 caracteres" required>
+				</td>
+				</tr>
+				<tr><th>Clave</th>
+                 <td inputread><input    type="password"   class="login-field" value=""  placeholder="ingrese clave" name="clave" pattern=".{4,8}" title="4 a 8 caracteres"  required>
+				</td>
+				</tr>
+				 
+				<tr><th>Nombre</th>
+ 				<td>
+				<input title="nombre" type="text"   value=""  placeholder="ingrese nombre" name="nombre" pattern="(?=*[a-z])(?=*[A-Z]).{2,40}" required>
+				</td>
+				</tr>
+				<tr><th>Apellido</th>
+ 				<td>
+				<input autofocus title="Apellido" type="text"  class="login-field" value=""  placeholder="ingrese apellido" name="apellido" pattern="(?=*[a-z])(?=*[A-Z]).{2,60}" required>
+				</td>
+				</tr> 
+				<tr><th>Pregunta secreta</th>
+ 				<td>
+				<select name="pregunta">
+					  <option value="" selected disabled hidden>Seleccione una pregunta</option>
+					  <option value="Nombre de la primer mascota">Nombre de la primer mascota</option>
+					  <option value="Lugar donde nacio">Lugar donde nacio</option>
+					  <option value="Apellido de soltera de su madre">Apellido de soltera de su madre</option>
+					</select>
+				</td>
+				</tr>
+				<tr><th>Respuesta Secreta</th>
+ 				<td>
+				<input  title="Respuesta" type="text"  class="login-field" value=""  placeholder="ingrese respuesta secreta" name="respuesta" pattern=".{4,}" title="4 o mas caracteres"  required>
+				</td>
+				</tr> 
+				</table>
+				<br>
+ 
+ 				<table border=0 align="center">
+				<tr> 
+				<input type="submit" value="Registrar" class="btn btn-primary btn-large btn-block" >
+
+				</td>
+				<td>
+					<a href="{{ url_for('home') }}" align="center" class="btn btn-primary btn-large btn-block">Cancelar</a>
+				</td>
+				</tr>
+
+ 				</table>
+
+ 
+
+			   
+				{% if msjerror %}
+					<div class="app-title">
+						<h3>{{msjerror}}</h3>
+					</div>
+				{% endif %}
+			 
+ 		 
+
+ 			</div>
+		 <br>
+</form>
+ 
+{% endif %}
+{% endblock %}
+
+ 

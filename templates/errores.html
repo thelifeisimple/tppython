@@ -8,12 +8,13 @@
 		<div class="container">
 		  {% block content %}
 		  <h1>Listado de Errores de Archivo de Ventas</h1>
-		  <p>Sólo se visualizarán al login. Las consultas del sistema funcionaran con los registros correctos del archivo de ventas</p>
-		  
-		  
-				<form action="/ventasultimas" method="POST">
-				  <input type="submit" value="Continuar">
-				</form>
+ 		  <form action="/exportarerrores" method="POST">
+			  <input name="reportname" type="text" value="errores" hidden>
+			  <input type="submit" value="Exportar Tabla">
+			
+		  </form>
+		  		  <p>Los registros listados seran excluidos de los reportes del sistema</p>
+
 					<table border=1>
 							<tr> 	 	 	
 									<th>Descripcion del Error</th>
@@ -28,6 +29,8 @@
 					</table>
 		  {% endblock %}
 		</div>
+		{% else %}
+					<li>Sin errores en el archivo de ventas.</li>
 		{% endif %}
 {% else %}
 <p> no esta logueado</p>
