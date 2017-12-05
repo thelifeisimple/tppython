@@ -1,7 +1,9 @@
-ARCHIVO_USUARIOS_NOMBRE = "static/archivo_usuarios.csv"
-ARCHIVO_USUARIOS_COLUMNAS = 2
-ARCHIVO_VENTAS_NOMBRE = "static/archivo_ventas.csv"
+ARCHIVO_USUARIOS_NOMBRE = "archivos/sistema/archivo_usuarios.csv"
+ARCHIVO_USUARIOS_NOMBRE_TEMP = "archivos/sistema/archivo_usuarios"
+ARCHIVO_USUARIOS_COLUMNAS =6
+ARCHIVO_VENTAS_NOMBRE = "archivos/sistema/archivo_ventas.csv"
 ARCHIVO_VENTAS_COLUMNAS = 5
+ARCHIVO_RERORTE_PATH = "archivos/reportes"
 
 #---------------------------------------------------------
 # funcion para validar cada linea del archivo de ventas
@@ -13,32 +15,32 @@ def valida_linea_archivo_ventas(columnas):
 	msjerror=  'OK'
 	
 	if (len(columnas) != ARCHIVO_VENTAS_COLUMNAS):
-		msjerror=  'La linea no posee el numero correcto de columnas.'
+		msjerror=  '[La linea no posee el numero correcto de columnas]'
 	else:	
 		if len(columnas[0])==0:
-			msjerror= 'Col1: Cliente vacio'	
+			msjerror= '[Col1: Cliente vacio]'	
 		
 		if len(columnas[1])==0:
-			msjerror= 'Col2: codigo de producto vacio'	
+			msjerror= '[Col2: codigo de producto vacio]'	
 			
 		if len(columnas[2])==0:
-			msjerror= 'Col3: Nombre de producto vacio'	
+			msjerror= '[Col3: Nombre de producto vacio]'	
 		
 		if len(columnas[3])==0:	
-			msjerror= msjerror+'|'+'Col4: cantidad vacia'	
+			msjerror= msjerror+'[Col4: cantidad vacia]'	
 		else:
 			try:
 				valor = float(columnas[3])
 			except ValueError:
-				msjerror= msjerror+'|'+'Col4: cantidad no es numerico'	
+				msjerror= msjerror+'[Col4: cantidad no es numerico]'	
 			
 		if len(columnas[3])==0:
-			msjerror= msjerror+'|'+'Col4: cantidad vacia'	
+			msjerror= msjerror+'[Col4: cantidad vacia]'	
 		else:
 			try:
 				valor = float(columnas[4])
 			except ValueError:
-				msjerror= msjerror+'|'+'Col5: precio no es numerico'	
+				msjerror= msjerror+'[Col5: precio no es numerico]'	
 			
 	return msjerror
 			
@@ -70,7 +72,7 @@ def validar_archivo_ventas ():
 				nrolinea+=1
 	
 				if msjerror != 'OK':	
-					errores.append("Linea "+str(nrolinea)+'|'+msjerror+'|'+columnas[0]+','+columnas[1]+','+columnas[2]+','+columnas[3]+','+columnas[4])
+					errores.append("[LINEA "+str(nrolinea)+']'+msjerror+','+columnas[0]+','+columnas[1]+','+columnas[2]+','+columnas[3]+','+columnas[4])
 				
 		return errores
 		
@@ -123,6 +125,109 @@ def validar_usuario (usuario, clave):
 		print("No tienes permisos sobre el archivo de usuarios.")
 
 #---------------------------------------------------------
+# funcion para recuperar datos del usuario 
+# retorna OK en caso de acceso correcto o el error
+# correspondiente.
+#---------------------------------------------------------
+def recuperar_usuario (usuario):
+	''' devuelve la datos de usuarios.
+    '''
+	import csv
+	existeUsr = False 
+	userList = list()
+	try:
+
+		with open(ARCHIVO_USUARIOS_NOMBRE, 'r', newline='') as csv_file:
+			reader = csv.reader(line.replace('  ', ',') for line in csv_file)
+			lineas = list(reader)
+
+			for columnas in lineas:
+				
+				if (columnas[0].upper().strip() == usuario.upper().strip() ):
+					existeUsr = True
+					userList.append(columnas)
+					break
+
+		
+		return userList
+				
+	except FileNotFoundError:
+		print ("El archivo de usuarios no existe.") 
+	except PermissionError:
+		print("No tienes permisos sobre el archivo de usuarios.")
+
+#---------------------------------------------------------
+# funcion para recuperar datos del usuario 
+# retorna OK en caso de acceso correcto o el error
+# correspondiente.
+#---------------------------------------------------------
+def registrar_usuario (usuario, clave, nombre, apellido, pregunta, respuesta):
+	''' devuelve la datos de usuarios.
+    '''
+	import csv
+	
+	try:
+
+		linea = usuario+","+clave+","+nombre+","+apellido+","+pregunta+","+respuesta
+		with open(ARCHIVO_USUARIOS_NOMBRE, 'a', newline='') as csv_file:
+			
+			csv_file.write(linea+"\n")
+			csv_file.close()
+		
+		return "OK"
+				
+	except FileNotFoundError:
+		print ("El archivo de usuarios no existe.") 
+	except PermissionError:
+		print("No tienes permisos sobre el archivo de usuarios.")
+
+#---------------------------------------------------------
+# funcion para recuperar datos del usuario 
+# retorna OK en caso de acceso correcto o el error
+# correspondiente.
+#---------------------------------------------------------
+def guardar_usuario (usuario, clave, nombre, apellido, pregunta, respuesta):
+	''' devuelve la datos de usuarios.
+    '''
+	import csv
+	import os
+	from datetime import datetime
+	x = datetime.now()
+	fecha = "%s" % x.isoformat() 
+	fecha = fecha.replace(":",".")
+	archivotemp =  ARCHIVO_USUARIOS_NOMBRE_TEMP+"-"+fecha+".csv"
+	
+	try:
+
+		linea = usuario+","+clave+","+nombre+","+apellido+","+pregunta+","+respuesta
+		with open(ARCHIVO_USUARIOS_NOMBRE, 'r', newline='') as csv_input,  open(archivotemp,'w') as csv_output :
+			reader = csv.reader(line.replace('  ', ',') for line in csv_input)
+			lineas = list(reader)
+
+			for columnas in lineas:
+				
+				if (columnas[0].upper().strip() == usuario.upper().strip() ):
+					csv_output.write(linea+"\n")
+				else:
+					lineasinmodificar = columnas[0]+","+columnas[1]+","+columnas[2]+","+columnas[3]+","+columnas[4]+","+columnas[5]+"\n"
+					csv_output.write(lineasinmodificar)
+
+
+			csv_input.close()
+			csv_output.close()
+			print("borra "+ARCHIVO_USUARIOS_NOMBRE)
+			os.remove(ARCHIVO_USUARIOS_NOMBRE)
+			print("renombra "+archivotemp+ " a "+ARCHIVO_USUARIOS_NOMBRE)
+			os.rename(archivotemp, ARCHIVO_USUARIOS_NOMBRE)
+		
+		return "OK"
+				
+	except FileNotFoundError:
+		print ("El archivo de usuarios no existe.") 
+	except PermissionError:
+		print("No tienes permisos sobre el archivo de usuarios.")
+
+#---------------------------------------------------------
 # funcion para obtener el listado completo de ventas contenido
 # en el archivo de ventas. Retorna la lista de ventas ordenada por 
 # cliente
@@ -145,6 +250,8 @@ def obtener_ventas ():
 				if valida_linea_archivo_ventas(columnas) == 'OK':	
 					archivoList.append(columnas)
 
+	 
+		
 		return archivoList
 	
 	except FileNotFoundError:
@@ -180,6 +287,7 @@ def obtener_ventas_cliente (cliente):
 						if ( cliente.upper().strip() in columnas[0].upper().strip() ):
 							archivoList.append(columnas)
 					
+		 
 			return archivoList
 		
 	except FileNotFoundError:
@@ -216,6 +324,8 @@ def obtener_ventas_producto (producto):
 						if (producto.upper().strip() in columnas[2].upper().strip() ):
 							archivoList.append(columnas)
 		
+		 
+			
 			return archivoList
 
 	except FileNotFoundError:
@@ -277,6 +387,7 @@ def obtener_ventas_mejor_cliente ():
 		# ordena el resultado por CANTIDAD descendente
 		#archivoList.sort( key=lambda cliente:cliente[1], reverse=True)
 		
+	 
 		return archivoList  
 		
 	except FileNotFoundError:
@@ -344,10 +455,55 @@ def obtener_ventas_mejor_producto ():
 		# ordena el resultado por CANTIDAD descendente
 		#archivoList.sort( key=lambda producto:producto[2], reverse=True)
 
+		
+	
+		
 		return archivoList
 		
 	except FileNotFoundError:
 		print ("El archivo de ventas no existe.") 
 	except PermissionError:
 		print("No tienes permisos sobre el archivo de ventas.")
+
+#---------------------------------------------------------
+# funcion para exportar la lista que se ve en pantalla 
+# 
+#---------------------------------------------------------
+def exportarcsv (lista, nombre, header, columnas):
+	''' 
+    '''
+	import csv
+	try:
+			
+		with open(nombre, 'w', newline='') as csv_file:
+
+			#configure writer to write standard csv file
+			writer = csv.writer(csv_file, delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL, lineterminator='\n')
+			writer.writerow(header)
+			for item in lista:
+				#Write item to csv_file
+				
+				if (columnas==1):
+					writer.writerow([item[0]])	
+				elif (columnas==2):
+					writer.writerow([item[0], item[1]])	
+				elif (columnas==3):
+					writer.writerow([item[0], item[1], item[2]])	
+				elif (columnas==4):
+					writer.writerow([item[0], item[1], item[2], item[3]])	
+				elif (columnas==5):
+					writer.writerow([item[0], item[1], item[2], item[3], item[4]])
+				elif (columnas==6):
+					writer.writerow([item[0], item[1], item[2], item[3], item[4], item[5]])						
+			
+		csv_file.close()
+		
+		return "OK"
+				
+	except FileNotFoundError:
+		print ("El reporte no pudo abrirse.") 
+	except PermissionError:
+		print("No tienes permisos sobre el archivo de reporte.")
+
+
 
