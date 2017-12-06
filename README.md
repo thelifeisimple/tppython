@@ -31,11 +31,10 @@ Los modulos de la aplicación son los siguientes:
 - pregunta secreta (Se eligirán entre las 3 preguntas que ofrece el sistem: "apellido de soltera de la madre", "donde nacio" o "nombre de la primera mascota").
 - respuesta.
 
-
 2- Bienvenida:
   En esta pantalla se mostrará el listado de ultimas ventas con el contenido de los registros (archivo_csv) 
 
-<<Menu>> 
+<<-- Menu -->> 
 3- Logo Farmasoft:
 	. El logo de farmasoft es un link que nos llevará a la pantalla de bienvenida (3).
 
