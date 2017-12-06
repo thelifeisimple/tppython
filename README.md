@@ -35,6 +35,7 @@ Los modulos de la aplicación son los siguientes:
   En esta pantalla se mostrará el listado de ultimas ventas con el contenido de los registros (archivo_csv) 
 
 <<-- Menu -->> 
+
 3- Logo Farmasoft:
 	. El logo de farmasoft es un link que nos llevará a la pantalla de bienvenida (3).
 
